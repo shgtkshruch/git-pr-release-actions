@@ -1,0 +1,21 @@
+Release x.x.x
+## <%= DateTime.now.strftime('%Y/%m/%d (%a)') %> Release
+
+## Version
+x.x.x
+
+## Contents
+<% pull_requests.each do |pr| -%>
+<%=  pr.to_checklist_item %>
+<% end -%>
+
+## Content Details
+<% pull_requests.each do |pr| -%>
+
+<details>
+<summary><%= "##{pr.pr.number} #{pr.pr.title}#{pr.mention}" %></summary>
+<p>
+
+</p>
+</details>
+<% end -%>
