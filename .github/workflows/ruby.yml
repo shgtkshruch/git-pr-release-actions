@@ -13,8 +13,11 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
-    - name: Build and test with Rake
+    - name: Install git-pr-release
       run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rake
+        gem install git-pr-release
+    - name: Dry run
+      run: |
+        git-pr-release -n
+      env:
+        GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
