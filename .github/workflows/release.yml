@@ -1,0 +1,21 @@
+name: Release
+
+on:
+  push:
+    branches: master
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set version
+      run: |
+        echo "::set-env name=VERSION::$(git show --format=%b | head -n 1)"
+    - name: Add git tag
+      run: |
+        git tag $VERSION
+        git describe --tags
+        git push https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git $VERSION
