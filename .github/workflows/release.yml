@@ -1,0 +1,19 @@
+name: Release
+
+on:
+  push:
+    branches: master
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Fetch all commits
+      run:
+        git fetch --prune --unshallow
+    - name: Add Git Tag
+      run: |
+        git tag $(git show --format=%b | tr -d '\n')
