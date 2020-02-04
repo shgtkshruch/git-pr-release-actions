@@ -17,8 +17,10 @@ jobs:
       run: |
         gem install -N git-pr-release
     - name: Dry run
+      env:
+        GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+        GIT_PR_RELEASE_BRANCH_PRODUCTION: master
+        GIT_PR_RELEASE_BRANCH_STAGING: release
       run: |
         git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git-pr-release --no-fetch -n
-      env:
-        GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
